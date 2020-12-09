@@ -7,6 +7,8 @@ RSpec.describe User, type: :model do
     end
 
     it "nickname,email,password,first_name,last_name,first_name_k,last_name_k,birthが存在すれば登録できる" do
+      @user.password = "1a1a1a"
+      @user.password_confirmation = "1a1a1a"
       expect(@user).to be_valid
     end
     it "nicknameが空だと登録できない" do
@@ -17,12 +19,12 @@ RSpec.describe User, type: :model do
     it "emailが空だと登録できない" do
       @user.email = nil
       @user.valid?
-      expect(@user.errors.full_messages).to include("Email can't be blank")
+      expect(@user.errors.full_messages).to include("Email @を含めて入力してください")
     end 
     it "emailに@がないと登録できない"do
       @user.email = "aaa"
       @user.valid?
-      expect(@user.errors.full_messages).to include("Email is invalid")
+      expect(@user.errors.full_messages).to include("Email @を含めて入力してください")
     end
     it "emailが重複すると登録できない" do
       another = FactoryBot.build(:user)
@@ -32,14 +34,14 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Email has already been taken")
     end
     it "passwordが６文字以下だと登録できない" do
-      @user.password = "12345"
-      @user.password_confirmation = "12345"
+      @user.password = "1234a"
+      @user.password_confirmation = "1234a"
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
     it "passwordとpassword_confirmationが一致しないと登録できない" do
-      @user.password = "123456"
-      @user.password_confirmation = "1234567"
+      @user.password = "12345a"
+      @user.password_confirmation = "123456a"
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
@@ -70,3 +72,5 @@ RSpec.describe User, type: :model do
     end
   end
 end
+
+# bundle exec rspec spec/models/user_spec.rb 
