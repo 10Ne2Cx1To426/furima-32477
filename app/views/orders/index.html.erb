@@ -33,7 +33,6 @@
 
     <%= form_with model:[@user_order], url: item_orders_path(@item.id), id: 'charge-form',method: :post, class: 'transaction-form-wrap',local: true do |f| %>
       <%= render 'shared/error_messages', model: f.object %>
-     <%# <input name="user_id" type="hidden" value=<%= current_user.id %>
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>

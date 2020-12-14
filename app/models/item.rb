@@ -15,5 +15,5 @@ class Item < ApplicationRecord
     validates :price
   end
 
-  validates :category_id, :condition_id, :delivery_day_id, :delivery_fee_id, :prefecture_id, numericality: { other_than: 1 } 
+  validates :category_id, :condition_id, :delivery_day_id, :delivery_fee_id, :prefecture_id, numericality: { other_than: 1, message: "can't be blank" } 
 end
