@@ -27,4 +27,7 @@ class User < ApplicationRecord
   end
     
   validates :birth, presence: { message: '生年月日を入力してください'}
+
+  has_one :address
+  has_one :order
 end
