@@ -52,7 +52,6 @@ RSpec.describe UserOrder, type: :model do
     it 'postal_codeが全角だと購入できない' do
       @user_order.postal_code= "１２３-４５６７"
       @user_order.valid?
-      binding.pry
       expect(@user_order.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
     end
   end
