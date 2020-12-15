@@ -34,6 +34,10 @@ RSpec.describe UserOrder, type: :model do
       @user_order.valid?
       expect(@user_order.errors.full_messages).to include("House number can't be blank")
     end
+    it 'buildingが空でも購入できる' do
+      @user_order.building = nil
+      expect(@user_order).to be_valid
+    end
     it 'phone_numberが全角だと購入できない' do
       @user_order.phone_number = "０９０１２３４５６７"
       @user_order.valid?
@@ -53,6 +57,16 @@ RSpec.describe UserOrder, type: :model do
       @user_order.postal_code= "１２３-４５６７"
       @user_order.valid?
       expect(@user_order.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+    end
+    it 'user_idが空だと購入できない' do
+      @user_order.user_id = nil
+      @user_order.valid?
+      expect(@user_order.errors.full_messages).to include("User can't be blank")
+    end
+    it 'item_idが空だと購入できない' do
+      @user_order.item_id = nil
+      @user_order.valid?
+      expect(@user_order.errors.full_messages).to include("Item can't be blank")
     end
   end
 end
